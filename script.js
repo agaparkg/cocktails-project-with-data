@@ -1,27 +1,27 @@
-import { cocktails } from './data.js';
+import { cocktails } from "./data.js";
 
-const main = document.querySelector('.main-content');
-const search = document.querySelector('#search');
-const searchBtn = document.querySelector('#search-btn');
-const ulList = document.querySelector('.list');
-const clearBtn = document.querySelector('.clear');
-const radioYes = document.querySelector('#yes');
-const radioNo = document.querySelector('#no');
+const main = document.querySelector(".main-content");
+const search = document.querySelector("#search");
+const searchBtn = document.querySelector("#search-btn");
+const ulList = document.querySelector(".list");
+const clearBtn = document.querySelector(".clear");
+const radioYes = document.querySelector("#yes");
+const radioNo = document.querySelector("#no");
 
-radioYes.addEventListener('click', function (e) {
+radioYes.addEventListener("click", function (e) {
   radioNo.checked = false;
-  searchBtn.style.display = 'inline-block';
+  searchBtn.style.display = "inline-block";
 
-  searchBtn.addEventListener('click', handleSearchBtnClick);
-  search.removeEventListener('input', handleSearchInput);
+  searchBtn.addEventListener("click", handleSearchBtnClick);
+  search.removeEventListener("input", handleSearchInput);
 });
 
-radioNo.addEventListener('click', function (e) {
+radioNo.addEventListener("click", function (e) {
   radioYes.checked = false;
-  searchBtn.style.display = 'none';
+  searchBtn.style.display = "none";
 
-  search.addEventListener('input', handleSearchInput);
-  searchBtn.removeEventListener('click', handleSearchBtnClick);
+  search.addEventListener("input", handleSearchInput);
+  searchBtn.removeEventListener("click", handleSearchBtnClick);
 });
 
 function handleSearchInput(event) {
@@ -64,24 +64,45 @@ function handleSearchBtnClick() {
 // ----------------#-------------------
 // Option 2
 const links = [
-  'All',
-  'Cocktail',
-  'Shot',
-  'Ordinary Drink',
-  'Coffee / Tea',
-  'Other/Unknown',
+  "All",
+  "Cocktail",
+  "Shot",
+  "Ordinary Drink",
+  "Coffee / Tea",
+  "Other/Unknown",
 ];
+
+// ---------------- # ------------------
+// const getUniqueCategoryNames = (data) => {
+//   const array = [];
+
+//   for (let i = 0; i < data.length; i++) {
+//     if (!array.includes(data[i].strCategory)) {
+//       array.push(data[i].strCategory);
+//     }
+//   }
+
+//   return array;
+// };
+
+// // const categories = ["all", ...getUniqueNames(data)]; // ['all', 'breakfast'...]
+// // const categories = ["all"].concat(getUniqueNames(data)); // ['all', 'breakfast'...]
+// const categories = getUniqueCategoryNames(cocktails); // ['all', 'breakfast'...]
+// categories.unshift("All");
+
+// console.log(categories);
+// ---------------- # ------------------
 
 function createLinks(links) {
   for (let link of links) {
-    const liEl = document.createElement('li');
-    liEl.className = 'list-item';
+    const liEl = document.createElement("li");
+    liEl.className = "list-item";
     liEl.innerText = link;
-    liEl.setAttribute('id', link);
+    liEl.setAttribute("id", link);
 
-    liEl.addEventListener('click', function (e) {
+    liEl.addEventListener("click", function (e) {
       const id = e.target.id;
-      if (id === 'All') {
+      if (id === "All") {
         renderData(cocktailsData);
       } else {
         const filteredCategoryData = cocktailsData.filter((item) => {
@@ -99,13 +120,13 @@ createLinks(links);
 // ----------------#-------------------
 let cocktailsData = cocktails;
 
-clearBtn.addEventListener('click', function () {
-  search.value = '';
+clearBtn.addEventListener("click", function () {
+  search.value = "";
   renderData(cocktailsData);
 });
 
 function renderData(cocktails) {
-  main.innerHTML = '';
+  main.innerHTML = "";
   for (let item of cocktails) {
     createCocktails(item);
   }
